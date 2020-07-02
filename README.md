@@ -1,41 +1,28 @@
 # s3-uploader
 
 Requirements:
-
- - python 3
- - virtualenv
+ - docker
+ - docker-compose
  
-This package is using boto3 to work with S3-like storage.
+### Usage
 
+#### Local development:
+
+Build:
 ```bash
-virtualenv --python=python3 venv
-source venv/bin/activate
-pip install -r requirements.txt
+docker-compose build
 ```
 
-Usage:
-
+Run:
 ```bash
-python uploader.py S3_ACCESS_KEY \
-    S3_SECRET \
-    S3_ENDPOINT \
-    S3_REGION \
-    S3_BUCKET \
-    S3_VISIBILITY \
-    S3_PATH \
-    SOURCE_FILE_PATH \
-    --s3_root="S3_ROOT_PATH"
-```
+cp .env.example .env
 
-Positional arguments:
- - S3_ACCESS_KEY - S3 storage access key.
- - S3_SECRET - S3 storage secret key.
- - S3_ENDPOINT - Endpoint of s3 storage.
- - S3_REGION - Region of s3 storage.
- - S3_BUCKET -  Name of a bucket.
- - S3_VISIBILITY - Either private or public visibility. Available values: private/public-read.
- - S3_PATH - Path to store file at.
- - SOURCE_FILE_PATH - Path to file to upload.
- 
-Optional arguments:
- - --s3_root - Root s3 bucket directory.
+docker-compose run app python3 uploader.py S3_REMOTE_PATH filename.txt
+```
+Note: `filename.txt` must be in `uploading` directory.
+
+#### Building and pushing complete docker image:
+```bash
+REGISTRY_PATH=${REGISTRY_PATH} IMAGE_TAG=${IMAGE_TAG} make build
+REGISTRY_PATH=${REGISTRY_PATH} IMAGE_TAG=${IMAGE_TAG} make push
+```
