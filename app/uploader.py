@@ -46,6 +46,10 @@ def init_arguments(args_parser=None):
 
 def upload_files():
     filepath = arguments.get('PATH')
+
+    if not glob(filepath):
+        print('No files to upload, please select correct filepath. Current is: "{}"'.format(filepath))
+
     if path.isfile(filepath):
         upload_file(filepath)
     else:
