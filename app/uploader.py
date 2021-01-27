@@ -50,8 +50,8 @@ def init_arguments(args_parser=None):
                              default=None)
     args_parser.add_argument('--s3_root', help='Root s3 bucket directory.', type=str, required=False, default=None)
 
-    args_parser.add_argument('--s3_path', help='Path to store file at.', type=str)
-    args_parser.add_argument('--path', help='Path to file to upload.', type=str)
+    args_parser.add_argument('s3_path', help='Path to store file at.', type=str)
+    args_parser.add_argument('path', help='Path to file to upload.', type=str)
 
 
 def upload_files():
